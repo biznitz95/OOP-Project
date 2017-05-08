@@ -14,7 +14,7 @@ private:
 	float speed;	//speed of pacman
 	float pi = 3.14;
 	float rad = .03;
-	float mouthSize = .06;
+	float mouthSize = .6;
 	
 public:
 	// Don't use draw function, opens new window

@@ -14,6 +14,7 @@ class App: public GlutApp {
 	Table* gameBoard;
 	Ghost* ghost;
 	Food* dots;
+	Pac* pacMan1;
 
 public:
     // Constructor, to initialize state

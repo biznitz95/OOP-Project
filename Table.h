@@ -20,7 +20,7 @@ private:
 public:
 	Table();
 	void build();
-	void contains(float x, float y);
+	bool contains(float x, float y);
 	~Table();
 };
 

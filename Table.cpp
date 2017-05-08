@@ -50,12 +50,17 @@ void Table::build() {
 		myRects[i]->build();
 }
 
-void Table::contains(float x, float y) {
+bool Table::contains(float x, float y) {
+	bool inside = false;
 	for (int i = 0; i < myRects.size(); i++) {
 		if (myRects[i]->contains(x, y)) {
-			cout << "You clicked inside a wall" << endl;
+			cout << "Ghost is inside the wall!" << endl;
+			inside = true;
 		}
 	}
+
+	return inside;
+
 }
 
 Table::~Table() {
