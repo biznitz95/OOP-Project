@@ -3,6 +3,7 @@
 
 #include "Rect.h"
 #include <vector>
+#include <iostream>
 
 class Table {
 private:
@@ -19,6 +20,7 @@ private:
 public:
 	Table();
 	void build();
+	void contains(float x, float y);
 	~Table();
 };
 

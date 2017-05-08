@@ -12,6 +12,9 @@ private:
 	float y;		//location on board i.e y
 	float angle;	//current direction of pacman
 	float speed;	//speed of pacman
+	float pi = 3.14;
+	float rad = .03;
+	float mouthSize = .06;
 	
 public:
 	// Don't use draw function, opens new window

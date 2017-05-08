@@ -7,6 +7,8 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
     mx = 0.0;
     my = 0.0;
 	gameBoard = new Table();
+	ghost = new Ghost(0,0);
+	dots = new Food();              ////////Khin
 }
 
 void App::draw() {
@@ -21,8 +23,10 @@ void App::draw() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     
+	ghost->build(.03);
+	dots->build();                  ////////Khin
 	gameBoard->build();
-    
+
     // We have been drawing everything to the back buffer
     // Swap the buffers to see the result of what we drew
     glFlush();
@@ -34,6 +38,8 @@ void App::mouseDown(float x, float y){
     mx = x;
     my = y;
     
+	gameBoard->contains(x, y);
+
     // Redraw the scene
     redraw();
 }
@@ -52,4 +58,9 @@ void App::keyPress(unsigned char key) {
         // Exit the app when Esc key is pressed
         exit(0);
     }
+}
+
+void App::specialKeyPress(int key) {
+	ghost->specialKeyPress(key);
+	redraw();
 }

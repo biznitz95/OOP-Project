@@ -5,8 +5,8 @@ using namespace std;
 Table::Table() {
 	rect1 = new Rect(-1, 1, 2, .1);		myRects.push_back(rect1);	// Top edge
 	rect2 = new Rect(-1, 1, .1, 2);		myRects.push_back(rect2);	// Left edge
-	rect3 = new Rect(1, 1, -.1, 2);		myRects.push_back(rect3);	// Right edge	
-	rect4 = new Rect(-1, -1, 2, -.1);	myRects.push_back(rect4);	// Bottom edge
+	rect3 = new Rect(.9, 1, .1, 2);		myRects.push_back(rect3);	// Right edge	
+	rect4 = new Rect(-1, -.9, 2, .1);	myRects.push_back(rect4);	// Bottom edge
 	rect5 = new Rect(-.1, .9, .2, .1);	myRects.push_back(rect5);	// Middle top square
 	rect6 = new Rect(-.1, .7, .2, .4);	myRects.push_back(rect6);	// Middle Middle Top Rectangle
 	rect7 = new Rect(-.2, .2, .4, .4);	myRects.push_back(rect7);	// Middle Middle Square
@@ -48,6 +48,14 @@ Table::Table() {
 void Table::build() {
 	for (int i = 0; i < myRects.size(); i++)
 		myRects[i]->build();
+}
+
+void Table::contains(float x, float y) {
+	for (int i = 0; i < myRects.size(); i++) {
+		if (myRects[i]->contains(x, y)) {
+			cout << "You clicked inside a wall" << endl;
+		}
+	}
 }
 
 Table::~Table() {
