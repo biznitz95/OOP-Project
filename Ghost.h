@@ -23,6 +23,7 @@ public:
 	void specialKeyPress(int key);	// Controls movement
 	float get(char temp);
 	void set(char type, float temp);
+	bool contains(float x, float y);
 	~Ghost();		// Need a Destructor too
 };
 #endif

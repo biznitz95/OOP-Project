@@ -27,10 +27,9 @@ class App: public GlutApp {
 	bool bPowerUp;			// Bizet's Power Up
 	int bPowerUpTimer;		// Bizet's Power Up Timer
 
-	Powerup* pUp1;
+	bool hPowerUp;
+	int hPowerUpTimer;
 	Powerup* pUp2;
-	Powerup* pUp3;
-	Powerup* pUp4;
 
 	int size;
 public:

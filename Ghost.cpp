@@ -87,6 +87,18 @@ void Ghost::set(char type, float temp) {
 	}
 }
 
+bool Ghost::contains(float x, float y) {
+	if (x >= this->a - radius && x <= this->a + radius) {
+		if (y <= this->b + radius && y >= this->b - radius) {
+			return true;
+		}
+		else
+			return false;
+	}
+	else
+		return false;
+}
+
 Ghost::~Ghost() {
 
 }

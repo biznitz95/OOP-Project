@@ -12,7 +12,7 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	gameBoard = new Table();
 	ghost = new Ghost(0,.25);
 	dots = new Food();              ////////Khin
-	pacMan1 = new Pac(-.1, -.1);	// Original: -.1, -.1
+	pacMan1 = new Pac(.2, .25);	// Original: -.1, -.1
 	pacMan2 = new Pac(-.1, .1);
 	pacMan3 = new Pac(.1, -.1);
 	pacMan4 = new Pac(.1, .1);
@@ -25,10 +25,10 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	// Setting up powerUp number 1, super speed
 	dots->myFood[0]->set('c', 0);
 
-	pUp1 = new Powerup(.85, .85);
-	pUp2 = new Powerup(-.85, .85);
-	pUp3 = new Powerup(-.85, -.85);
-	pUp4 = new Powerup(.85, -.85);
+	// Henry power up
+	dots->myFood[190-18]->set('c', 0);
+	hPowerUp = false;
+	hPowerUpTimer = 5000;
 
 	size = 0;	// Size = 190
 }
@@ -51,10 +51,6 @@ void App::draw() {
 	pacMan2->build();
 	pacMan3->build();
 	pacMan4->build();
-	pUp1->build();
-	pUp2->build();
-	pUp3->build();
-	pUp4->build();
 	gameBoard->build();
 
     // We have been drawing everything to the back buffer
@@ -143,6 +139,9 @@ void App::specialKeyPress(int key) {
 					cout << "Power up Activated!" << endl;
 					bPowerUp = true;
 				}
+				if (ptr == dots->myFood[190 - 18]) {
+					hPowerUp = true;
+				}
 				size++;
 				delete ptr;
 				if (!pUp)
@@ -155,7 +154,7 @@ void App::specialKeyPress(int key) {
 	}
 
 	// Checks for death of player
-	if (!bPowerUp) {
+	if (!bPowerUp && !hPowerUp) {
 		bool death1 = pacMan1->contains(ghost->get('x'), ghost->get('y'));
 		if (death1)
 			delete ghost;
@@ -169,7 +168,7 @@ void App::specialKeyPress(int key) {
 		if (death4)
 			delete ghost;
 	}
-	else {
+	else if(bPowerUp) {
 		bool death1 = pacMan1->contains(ghost->get('x'), ghost->get('y'));
 		if (death1) {
 			pacMan1->set('x', -pacMan1->get('x'));
@@ -184,40 +183,21 @@ void App::specialKeyPress(int key) {
 		if (death4)
 			pacMan4->set('x', -pacMan4->get('x'));
 	}
-
-	bool pUp_consume1 = pUp1->contains(ghost->get('x'), ghost->get('y'));
-	if (pUp_consume1) {
-		delete pUp1;
-		pacMan1->color = true;
-		pacMan2->color = true;
-		pacMan3->color = true;
-		pacMan4->color = true;
+	else if (hPowerUp) {
+		cout << "Henry power up Activated" << endl;
+		bool death1 = pacMan1->contains(ghost->get('x'), ghost->get('y'));
+		if (death1)
+			delete pacMan1;
+		bool death2 = pacMan2->contains(ghost->get('x'), ghost->get('y'));
+		if (death2)
+			delete pacMan2;
+		bool death3 = pacMan3->contains(ghost->get('x'), ghost->get('y'));
+		if (death3)
+			delete pacMan3;
+		bool death4 = pacMan4->contains(ghost->get('x'), ghost->get('y'));
+		if (death4)
+			delete pacMan4;
 	}
-	bool pUp_consume2 = pUp2->contains(ghost->get('x'), ghost->get('y'));
-	if (pUp_consume2) {
-		delete pUp2;
-		pacMan1->color = true;
-		pacMan2->color = true;
-		pacMan3->color = true;
-		pacMan4->color = true;
-	}
-	bool pUp_consume3 = pUp3->contains(ghost->get('x'), ghost->get('y'));
-	if (pUp_consume3) {
-		delete pUp3;
-		pacMan1->color = true;
-		pacMan2->color = true;
-		pacMan3->color = true;
-		pacMan4->color = true;
-	}
-	bool pUp_consume4 = pUp4->contains(ghost->get('x'), ghost->get('y'));
-	if (pUp_consume4) {
-		delete pUp4;
-		pacMan1->color = true;
-		pacMan2->color = true;
-		pacMan3->color = true;
-		pacMan4->color = true;
-	}
-
 	redraw();
 }
 
@@ -227,6 +207,13 @@ void App::idle() {
 		bPowerUpTimer--;
 		if (!bPowerUpTimer)
 			bPowerUp = !bPowerUp;
+	}
+
+	if (hPowerUp) {
+		cout << "Timer: " << hPowerUpTimer << endl;
+		hPowerUpTimer--;
+		if (!hPowerUpTimer)
+			hPowerUp = !hPowerUp;
 	}
 
 	// Ending of the game when food is finished
