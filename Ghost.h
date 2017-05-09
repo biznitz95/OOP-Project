@@ -13,6 +13,7 @@ class Ghost
 	float pace;
     float speed;	//speed of pacman
 	float radius;
+	bool up, down, left, right;
 
 public:  
 	// Don't use Draw function, opens new window

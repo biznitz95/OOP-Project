@@ -6,6 +6,7 @@
 #include "Ghost.h"
 #include "Table.h"
 #include "Food.h"
+#include "score.h"
 
 class App: public GlutApp {
     // Maintain app state here
@@ -15,7 +16,9 @@ class App: public GlutApp {
 	Ghost* ghost;
 	Food* dots;
 	Pac* pacMan1;
-
+	Score* myScore;
+	int score;
+	bool pUp;
 public:
     // Constructor, to initialize state
     App(const char* label, int x, int y, int w, int h);
@@ -26,6 +29,7 @@ public:
     void mouseDown(float x, float y);
     void mouseDrag(float x, float y);
 	void specialKeyPress(int key);
+	void idle();
 };
 
 #endif

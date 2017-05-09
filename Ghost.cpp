@@ -3,8 +3,9 @@
 Ghost::Ghost(float x, float y) {
 	a = x;                   
 	b = y;
-	pace = .05;
+	pace = .01;
 	speed = 1;
+	up = down = left = right = false;
 }
 void Ghost::reBuild()
 {
@@ -13,7 +14,7 @@ void Ghost::reBuild()
 void Ghost::build(float r)
 {	
 	radius = r;
-
+	float h = (.049 / 2.0);
 	// Top half
 	glBegin(GL_POLYGON);
 	for (float theta = 0.0; theta <= 3.14; theta += 0.01)
@@ -25,21 +26,21 @@ void Ghost::build(float r)
 
 	// Legs
 	glBegin(GL_TRIANGLES);
-	glColor3d(1, 1, 1); glVertex2f(a - .03, b); 
-	glColor3d(1, 1, 1); glVertex2f(a - .015, b); 
-	glColor3d(1, 1, 1); glVertex2f(a - (.015+(.015/2.0)), b-.03);
+	glColor3d(1, 1, 1); glVertex2f(a - .049, b); 
+	glColor3d(1, 1, 1); glVertex2f(a - h, b); 
+	glColor3d(1, 1, 1); glVertex2f(a - (.02+(h/2.0)), b-.049);
 
-	glColor3d(1, 1, 1); glVertex2f(a - .015, b);
+	glColor3d(1, 1, 1); glVertex2f(a - h, b);
 	glColor3d(1, 1, 1); glVertex2f(a, b);
-	glColor3d(1, 1, 1); glVertex2f(a - (.015 + (.015 / 2.0))+.015, b - .03);
+	glColor3d(1, 1, 1); glVertex2f(a - (h + (h / 2.0))+h, b - .049);
 
 	glColor3d(1, 1, 1); glVertex2f(a, b);
-	glColor3d(1, 1, 1); glVertex2f(a + .015, b);
-	glColor3d(1, 1, 1); glVertex2f(a - (.015 + (.015 / 2.0)) + .03, b - .03);
+	glColor3d(1, 1, 1); glVertex2f(a + h, b);
+	glColor3d(1, 1, 1); glVertex2f(a - (h + (h / 2.0)) + .049, b - .049);
 
-	glColor3d(1, 1, 1); glVertex2f(a + .015, b);
-	glColor3d(1, 1, 1); glVertex2f(a + .03, b);
-	glColor3d(1, 1, 1); glVertex2f(a - (.015 + (.015 / 2.0)) + .045, b - .03);
+	glColor3d(1, 1, 1); glVertex2f(a + h, b);
+	glColor3d(1, 1, 1); glVertex2f(a + .049, b);
+	glColor3d(1, 1, 1); glVertex2f(a - (h + (h / 2.0)) + .049+h, b - .049);
 	glEnd();
 }
 
@@ -47,19 +48,15 @@ void Ghost::build(float r)
 void Ghost::specialKeyPress(int key) {
 	switch (key) {
 	case GLUT_KEY_UP:
-		std::cout << "Up key pressed" << std::endl;
 		b += pace*speed;
 		break;
 	case GLUT_KEY_DOWN:
-		std::cout << "Down key pressed" << std::endl;
 		b -= pace*speed;
 		break;
 	case GLUT_KEY_LEFT:
-		std::cout << "Left key pressed" << std::endl;
 		a -= pace*speed;
 		break;
 	case GLUT_KEY_RIGHT:
-		std::cout << "Right key pressed" << std::endl;
 		a += pace*speed;
 		break;
 	}

@@ -13,8 +13,8 @@
 #include "Rect.h"
 
 class Food {
-private:
-	std::vector<Rect> myFood;
+public:
+	std::vector<Rect*> myFood;
 public:
 	Food();
 	void build();
