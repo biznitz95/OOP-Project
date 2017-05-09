@@ -24,12 +24,18 @@ class App: public GlutApp {
 	Pac* pacMan3;
 	Pac* pacMan4;
 
-	bool bPowerUp;			// Bizet's Power Up
+	bool bPowerUp;			// Bizet's Power Up: teleport pacman elsewhere when touched
 	int bPowerUpTimer;		// Bizet's Power Up Timer
 
-	bool hPowerUp;
+	bool hPowerUp;			//kill pacman instead when touched
 	int hPowerUpTimer;
 	Powerup* pUp2;
+
+	bool kPowerUp;			//run through pacman without dying
+	int kPowerUpTimer;
+
+	bool dPowerUp;			//double the points
+	int dPowerUpTimer;
 
 	int size;
 public:

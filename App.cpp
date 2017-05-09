@@ -30,6 +30,14 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	hPowerUp = false;
 	hPowerUpTimer = 5000;
 
+	dots->myFood[190 - 175]->set('c', 0);
+	kPowerUp = false;
+	kPowerUpTimer = 5000;
+
+	dots->myFood[189]->set('c', 0);
+	dPowerUp = false;
+	dPowerUpTimer = 5000;
+
 	size = 0;	// Size = 190
 }
 
@@ -136,25 +144,36 @@ void App::specialKeyPress(int key) {
 		if (x >= xPos && x <= xPos + (2.0*.049)) {
 			if (y <= yPos && y >= yPos - (2.0*.049)) {
 				if (ptr == dots->myFood[0]) {
-					cout << "Power up Activated!" << endl;
 					bPowerUp = true;
 				}
 				if (ptr == dots->myFood[190 - 18]) {
 					hPowerUp = true;
 				}
+				if (ptr == dots->myFood[190 - 175]) {
+					kPowerUp = true;
+				}
+				if (ptr == dots->myFood[189]) {
+					cout << "Ate fruit 189" << endl;
+					dPowerUp = true;
+				}
 				size++;
 				delete ptr;
-				if (!pUp)
+				//score++;
+				if (!dPowerUp) {
 					score++;
-				else
-					score += 2;
+				}
+				else if (dPowerUp) {
+					score += 5;
+				}
 				cout << "Your current score is: " << score << endl;;
 			}
 		}
 	}
 
+
+
 	// Checks for death of player
-	if (!bPowerUp && !hPowerUp) {
+	if (!bPowerUp && !hPowerUp && !kPowerUp) {
 		bool death1 = pacMan1->contains(ghost->get('x'), ghost->get('y'));
 		if (death1)
 			delete ghost;
@@ -198,6 +217,10 @@ void App::specialKeyPress(int key) {
 		if (death4)
 			delete pacMan4;
 	}
+	else if (kPowerUp) {
+		cout << "Khin power up Activated" << endl;
+	}
+
 	redraw();
 }
 
@@ -214,6 +237,20 @@ void App::idle() {
 		hPowerUpTimer--;
 		if (!hPowerUpTimer)
 			hPowerUp = !hPowerUp;
+	}
+
+	if (kPowerUp) {
+		cout << "Timer: " << kPowerUpTimer << endl;
+		kPowerUpTimer--;
+		if (!kPowerUpTimer)
+			kPowerUp = !kPowerUp;
+	}
+
+	if (dPowerUp) {
+		cout << "Timer: " << dPowerUpTimer << endl;
+		dPowerUpTimer--;
+		if (!dPowerUpTimer)
+			dPowerUp = !dPowerUp;
 	}
 
 	// Ending of the game when food is finished
