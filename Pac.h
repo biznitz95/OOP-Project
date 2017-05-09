@@ -15,13 +15,20 @@ private:
 	float pi = 3.14f;
 	float rad = .03f;
 	float mouthSize = .6f;
-
+	bool col;
+	float pace;
+	bool edible;
+	int timer;
 public:
 	// Don't use draw function, opens new window
 	Pac(float x, float y);
+	void specialKeyPress(int key);
 	void build();
 	void reBuild();
 	bool contains(float x, float y);
+	bool color;
+	void set(char type, float temp);
+	float get(char type);
 	~Pac();
 
 };

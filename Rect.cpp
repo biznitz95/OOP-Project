@@ -20,7 +20,8 @@ void Rect::build() {
 
 	// Yellow Square
 	glBegin(GL_POLYGON);
-	glColor3d(x, 0.0, yy );
+	glColor3d(x, 0.0, yy); 
+	if (col) glColor3d(1, 1, 1);
 
 	// Top line
 	glVertex2f(x, y);
@@ -28,6 +29,7 @@ void Rect::build() {
 
 	glBegin(GL_POLYGON);
 	glColor3d(xx + w, 0.0, yy);
+	if (col) glColor3d(1, 1, 1);
 
 	// Right line
 	glVertex2f(x + w, y);
@@ -35,7 +37,7 @@ void Rect::build() {
 
 	glBegin(GL_POLYGON);
 	glColor3d(xx + w, 0.0, yy - h);
-
+	if (col) glColor3d(1, 1, 1);
 
 	// Bottom line
 	glVertex2f(x + w, y - h);
@@ -43,6 +45,7 @@ void Rect::build() {
 
 	glBegin(GL_POLYGON);
 	glColor3d(x, 0.0, y - hh);
+	if (col) glColor3d(1, 1, 1);
 
 	// Left line
 	glVertex2f(x, y - h);
@@ -65,6 +68,8 @@ void Rect::set(char type, float temp) {
 		case 'h':
 			h = temp;
 			break;
+		case 'c':
+			col = true;
 	}
 }
 
@@ -98,14 +103,11 @@ bool Rect::contains(float x, float y) {
 }
 
 void Rect::change(bool temp) {
-	if (temp) {
-		if (col) {
-			col = false; 
-		}
-		else {
-			col = true;
-		}
-	}
+
+}
+
+void Rect::changeColor() {
+	glColor3d(1, 1, 1);
 }
 
 Rect::~Rect() {

@@ -1,4 +1,5 @@
 #include "Table.h"
+#include "GlutApp.h"
 
 using namespace std;
 
@@ -46,15 +47,15 @@ Table::Table() {
 }
 
 void Table::build() {
-	for (int i = 0; i < myRects.size(); i++)
+	for (int i = 0; i < myRects.size(); i++) {
 		myRects[i]->build();
+	}
 }
 
 bool Table::contains(float x, float y) {
 	bool inside = false;
 	for (int i = 0; i < myRects.size(); i++) {
 		if (myRects[i]->contains(x, y)) {
-			cout << "Ghost is inside the wall!" << endl;
 			inside = true;
 		}
 	}

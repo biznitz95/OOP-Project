@@ -14,6 +14,7 @@ class Rect {
 		float get(char type);
 		bool contains(float x, float y);
 		void change(bool temp);
+		void changeColor();
 		~Rect();
 };
 #endif
