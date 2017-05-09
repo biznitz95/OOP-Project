@@ -8,21 +8,22 @@
 class Pac
 {
 private:
-	float x;		//location on board i.e x
-	float y;		//location on board i.e y
+	float c;		//location on board i.e x
+	float d;		//location on board i.e y
 	float angle;	//current direction of pacman
 	float speed;	//speed of pacman
-	float pi = 3.14;
-	float rad = .03;
-	float mouthSize = .6;
-	
+	float pi = 3.14f;
+	float rad = .03f;
+	float mouthSize = .6f;
+
 public:
 	// Don't use draw function, opens new window
-    Pac();
+	Pac(float x, float y);
 	void build();
 	void reBuild();
-    ~Pac(void);   
-    
+	bool contains(float x, float y);
+	~Pac();
+
 };
 
 

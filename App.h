@@ -15,10 +15,13 @@ class App: public GlutApp {
 	Table* gameBoard;
 	Ghost* ghost;
 	Food* dots;
-	Pac* pacMan1;
 	Score* myScore;
 	int score;
 	bool pUp;
+	Pac* pacMan1;
+	Pac* pacMan2;
+	Pac* pacMan3;
+	Pac* pacMan4;
 public:
     // Constructor, to initialize state
     App(const char* label, int x, int y, int w, int h);

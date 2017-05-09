@@ -11,7 +11,10 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	gameBoard = new Table();
 	ghost = new Ghost(0,.25);
 	dots = new Food();              ////////Khin
-	pacMan1 = new Pac();
+	pacMan1 = new Pac(-.1, -.1);
+	pacMan2 = new Pac(-.1, .1);
+	pacMan3 = new Pac(.1, -.1);
+	pacMan4 = new Pac(.1, .1);
 	myScore = new Score();
 	myScore->points = 0;
 	score = 0;
@@ -33,6 +36,9 @@ void App::draw() {
 	ghost->build(.049);
 	dots->build();                  ////////Khin
 	pacMan1->build();
+	pacMan2->build();
+	pacMan3->build();
+	pacMan4->build();
 	gameBoard->build();
 
     // We have been drawing everything to the back buffer
@@ -124,6 +130,20 @@ void App::specialKeyPress(int key) {
 			}
 		}
 	}
+
+	bool death1 = pacMan1->contains(ghost->get('x'), ghost->get('y'));
+	if (death1)
+		delete ghost;
+	bool death2 = pacMan2->contains(ghost->get('x'), ghost->get('y'));
+	if (death2)
+		delete ghost;
+	bool death3 = pacMan3->contains(ghost->get('x'), ghost->get('y'));
+	if (death3)
+		delete ghost;
+	bool death4 = pacMan4->contains(ghost->get('x'), ghost->get('y'));
+	if (death4)
+		delete ghost;
+
 	redraw();
 	cout << "Your current score is: " << score << endl;;
 }
