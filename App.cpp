@@ -29,6 +29,8 @@ App::App(const char* label, int x, int y, int w, int h): GlutApp(label, x, y, w,
 	pUp2 = new Powerup(-.85, .85);
 	pUp3 = new Powerup(-.85, -.85);
 	pUp4 = new Powerup(.85, -.85);
+
+	size = 0;	// Size = 190
 }
 
 void App::draw() {
@@ -141,11 +143,13 @@ void App::specialKeyPress(int key) {
 					cout << "Power up Activated!" << endl;
 					bPowerUp = true;
 				}
+				size++;
 				delete ptr;
 				if (!pUp)
 					score++;
 				else
 					score += 2;
+				cout << "Your current score is: " << score << endl;;
 			}
 		}
 	}
@@ -215,7 +219,6 @@ void App::specialKeyPress(int key) {
 	}
 
 	redraw();
-	cout << "Your current score is: " << score << endl;;
 }
 
 void App::idle() {
@@ -224,5 +227,13 @@ void App::idle() {
 		bPowerUpTimer--;
 		if (!bPowerUpTimer)
 			bPowerUp = !bPowerUp;
+	}
+
+	// Ending of the game when food is finished
+	if (size == 190) {
+		cout << "Good job! You finished the game!" << endl;
+		int temp;
+		cin >> temp;
+		exit;
 	}
 }

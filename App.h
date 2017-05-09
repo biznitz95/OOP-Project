@@ -31,6 +31,8 @@ class App: public GlutApp {
 	Powerup* pUp2;
 	Powerup* pUp3;
 	Powerup* pUp4;
+
+	int size;
 public:
     // Constructor, to initialize state
     App(const char* label, int x, int y, int w, int h);
