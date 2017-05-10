@@ -1,17 +1,16 @@
 #include"Powerup.h"
 #include<math.h>
 #include"Ghost.h"
-#include"Table.h"
-Powerup::Powerup(float x, float y)
+#include"Table.h"
+Powerup::Powerup(float x, float y)
 {
 	e = x;
 	f = y;
-}
-
+}
 void Powerup::build()
 {
-	float theta;
-	glBegin(GL_POLYGON);
+	float theta;
+	glBegin(GL_POLYGON);
 	for (theta = 0.0; theta <= 2.0f * pi; theta += 0.003f)
 	{
 		glColor3f(0, 1, 0);

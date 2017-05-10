@@ -143,7 +143,7 @@ void GlutApp::motionCB(int x, int y){
     
     // Call drag handler
     app->mouseDrag(mx, my);
-}
+} 
 
 void GlutApp::passiveCB (int x, int y){
     // Convert mouse position to scene coordinates
